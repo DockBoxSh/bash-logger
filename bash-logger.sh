@@ -74,7 +74,7 @@ FORMAT_LOG() {
 LOG() {
     local level="$1"
     local log="$2"
-    local log_function_name="${!level}"
+    local log_function_name="${level^^}"
     $log_function_name "$log"
 }
 
