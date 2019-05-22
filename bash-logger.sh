@@ -171,3 +171,13 @@ LOG_HANDLER_LOGFILE() {
     [ -d "$log_path" ] || mkdir -p "$log_path"
     echo "$log" >> "$LOGFILE"
 }
+
+# Log your command before executing it
+LOG_RUN() {
+    local cmd="$1"
+    local level="${2:-DEBUG}"
+
+    $level "$cmd"
+
+	/bin/bash -c "LANG=C LC_ALL=C ${cmd}"
+}
