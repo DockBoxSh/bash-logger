@@ -1,13 +1,14 @@
-# Bash Logger
+# ![](https://github.com/docker-suite/artwork/raw/master/logo/png/logo_32.png) Bash Logger
+![License: MIT](https://img.shields.io/github/license/docker-suite/goss.svg?color=green&style=flat-square)
 
 Bash Logger designed to incorperate [PSR-3](http://www.php-fig.org/psr/psr-3/) compliance.
 
-## Contributors
+## ![](https://github.com/docker-suite/artwork/raw/master/various/pin/png/pin_16.png) Contributors
 
 - Dean Rather
 - Hexosse
 
-## Using Bash Logger
+## ![](https://github.com/docker-suite/artwork/raw/master/various/pin/png/pin_16.png) Using Bash Logger
 
 **source** the *bash-logger.sh* script at the beginning of any Bash program.
 
@@ -20,7 +21,7 @@ Bash Logger designed to incorperate [PSR-3](http://www.php-fig.org/psr/psr-3/) c
 
 > Function names are in CAPS as not to conflict with the `info` function and `alert` aliases.
 
-## An Overview of Bash Logger
+## ![](https://github.com/docker-suite/artwork/raw/master/various/pin/png/pin_16.png) An Overview of Bash Logger
 
 ### Colorized Output
 
@@ -52,7 +53,7 @@ Bash Logger supports the logging levels described by [RFC 5424](http://tools.iet
 
 - **EMERGENCY** Emergency: system is unusable.
 
-## Handlers
+## ![](https://github.com/docker-suite/artwork/raw/master/various/pin/png/pin_16.png) Handlers
 
 By default:
 - Logs are displayed in colour
