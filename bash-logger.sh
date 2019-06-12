@@ -110,13 +110,8 @@ LOG_LEVEL_NAME() {
 # Usage: LOG_HANDLER_DEFAULT <log level> <log message>
 # Eg: LOG_HANDLER_DEFAULT DEBUG "My debug log"
 LOG_HANDLER_DEFAULT() {
-    # Normal log
-    if [ -t 0 ]; then
-        LOG_HANDLER_OUT "$@"
-    fi
-
     # From pipe
-    if [ ! -t 0 ]; then
+    if [ -p /dev/stdin ]; then
         local level="$1"
         shift
         while read -r line; do
@@ -127,6 +122,9 @@ LOG_HANDLER_DEFAULT() {
             args+=( "${line}" );
             LOG_HANDLER_OUT "$level" "${args[*]}"
         done
+    # Normal log
+    else
+        LOG_HANDLER_OUT "$@"
     fi
 }
 
