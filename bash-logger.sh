@@ -18,21 +18,26 @@ set -e
 declare -A LOG_LEVELS
 export LOG_LEVELS=([DEBUG]=7 [INFO]=6 [NOTICE]=5 [WARNING]=4 [ERROR]=3 [CRITICAL]=2 [ALERT]=1 [EMERGENCY]=0)
 
-# LOG variables
-export LOGFILE="$HOME/bash-logger.log"
-export LOG_FORMAT='%DATE %PID [%LEVEL] %MESSAGE'
-export LOG_DATE_FORMAT='+%F %T %Z'                  # Eg: 2014-09-07 21:51:57 EST
-export LOG_COLOR_ENABLE=1                           # Enable colors by default
-export LOG_LEVEL=${LOG_LEVELS[DEBUG]}               # Logs all messages to the terminal
-export LOG_COLOR_DEBUG="\033[0;34m"                 # Blue
-export LOG_COLOR_INFO="\033[0;37m"                  # White
-export LOG_COLOR_NOTICE="\033[1;32m"                # Green
-export LOG_COLOR_WARNING="\033[1;33m"               # Yellow
-export LOG_COLOR_ERROR="\033[1;31m"                 # Red
-export LOG_COLOR_CRITICAL="\033[44m"                # Blue Background
-export LOG_COLOR_ALERT="\033[45m"                   # Purple Background
-export LOG_COLOR_EMERGENCY="\033[41m"               # Red Background
-export RESET_COLOR="\033[0m"
+# Define LOG variables
+LOG_VARS() {
+    export LOGFILE=${LOGFILE:-"$HOME/bash-logger.log"}
+    export LOG_FORMAT=${LOG_FORMAT:-'%DATE %PID [%LEVEL] %MESSAGE'}
+    export LOG_DATE_FORMAT=${LOG_DATE_FORMAT:-'+%F %T %Z'}              # Eg: 2014-09-07 21:51:57 EST
+    export LOG_COLOR_ENABLE=${LOG_COLOR_ENABLE:-1}                      # Enable colors by default
+    export LOG_LEVEL=${LOG_LEVEL:-${LOG_LEVELS[DEBUG]}}                 # Logs all messages to the terminal
+    export LOG_COLOR_DEBUG=${LOG_COLOR_DEBUG:-"\033[0;34m"}             # Blue
+    export LOG_COLOR_INFO=${LOG_COLOR_INFO:-"\033[0;37m"}               # White
+    export LOG_COLOR_NOTICE=${LOG_COLOR_NOTICE:-"\033[1;32m"}           # Green
+    export LOG_COLOR_WARNING=${LOG_COLOR_WARNING:-"\033[1;33m"}         # Yellow
+    export LOG_COLOR_ERROR=${LOG_COLOR_ERROR:-"\033[1;31m"}             # Red
+    export LOG_COLOR_CRITICAL=${LOG_COLOR_CRITICAL:-"\033[44m"}         # Blue Background
+    export LOG_COLOR_ALERT=${LOG_COLOR_ALERT:-"\033[45m"}               # Purple Background
+    export LOG_COLOR_EMERGENCY=${LOG_COLOR_EMERGENCY:-"\033[41m"}       # Red Background
+    export RESET_COLOR=${RESET_COLOR:-"\033[0m"}
+}
+
+# Set LOG variables
+LOG_VARS
 
 #--------------------------------------------------------------------------------------------------
 # Individual Log Functions
@@ -180,4 +185,24 @@ LOG_RUN() {
     $level "$cmd"
 
 	/bin/bash -c "LANG=C LC_ALL=C ${cmd}"
+}
+
+# Reset log variables to default values
+LOG_RESET() {
+    unset LOGFILE
+    unset LOG_FORMAT
+    unset LOG_DATE_FORMAT
+    unset LOG_COLOR_ENABLE
+    unset LOG_LEVEL
+    unset LOG_COLOR_DEBUG
+    unset LOG_COLOR_INFO
+    unset LOG_COLOR_NOTICE
+    unset LOG_COLOR_WARNING
+    unset LOG_COLOR_ERROR
+    unset LOG_COLOR_CRITICAL
+    unset LOG_COLOR_ALERT
+    unset LOG_COLOR_EMERGENCY
+    unset RESET_COLOR
+
+    LOG_VARS
 }

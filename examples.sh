@@ -20,7 +20,6 @@ WARNING "Waring log with default configurations"
 # Overwriting default configurables
 echo # newline
 export LOGFILE=~/my-bash-logger.log
-export LOGFILE=./my-bash-logger.log
 export LOG_DATE_FORMAT='+%c'
 export LOG_FORMAT='%LEVEL %DATE -- %MESSAGE'
 NOTICE "Configurations changed"
@@ -29,9 +28,9 @@ DEBUG "example debug log"
 NOTICE "example notice log"
 WARNING "example warning log"
 
-# re-source to overwrite config changes
+# reset to overwrite config changes
 echo # newline
-source bash-logger.sh
+LOG_RESET
 export LOGFILE=./my-bash-logger.log
 NOTICE "Configurations Reset"
 DEBUG "example debug log"
