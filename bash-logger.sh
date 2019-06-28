@@ -18,6 +18,9 @@ set -e
 declare -A LOG_LEVELS
 export LOG_LEVELS=([DEBUG]=7 [INFO]=6 [NOTICE]=5 [WARNING]=4 [ERROR]=3 [CRITICAL]=2 [ALERT]=1 [EMERGENCY]=0)
 
+# make sure that HOME exist
+export HOME=${HOME:-$(getent passwd "$(whoami)" | cut -d: -f6)}
+
 # Define LOG variables
 LOG_VARS() {
     export LOGFILE=${LOGFILE:-"$HOME/bash-logger.log"}
