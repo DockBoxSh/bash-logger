@@ -23,7 +23,6 @@ export LOGFILE=~/my-bash-logger.log
 export LOG_DATE_FORMAT='+%c'
 export LOG_FORMAT='%LEVEL %DATE -- %MESSAGE'
 NOTICE "Configurations changed"
-
 DEBUG "example debug log"
 NOTICE "example notice log"
 WARNING "example warning log"

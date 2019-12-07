@@ -18,14 +18,18 @@ set -e
 declare -A LOG_LEVELS
 export LOG_LEVELS=([DEBUG]=7 [INFO]=6 [NOTICE]=5 [WARNING]=4 [ERROR]=3 [CRITICAL]=2 [ALERT]=1 [EMERGENCY]=0)
 
-# make sure that HOME exist
+# Make sure that HOME exist
 export HOME=${HOME:-$(getent passwd "$(whoami)" | cut -d: -f6)}
+
+# Default formats
+export DEF_LOG_FORMAT='%DATE %PID [%LEVEL] %MESSAGE'
+export DEF_LOG_DATE_FORMAT='+%F %T %Z'
 
 # Define LOG variables
 LOG_VARS() {
     export LOGFILE=${LOGFILE:-"$HOME/bash-logger.log"}
-    export LOG_FORMAT=${LOG_FORMAT:-'%DATE %PID [%LEVEL] %MESSAGE'}
-    export LOG_DATE_FORMAT=${LOG_DATE_FORMAT:-'+%F %T %Z'}              # Eg: 2014-09-07 21:51:57 EST
+    export LOG_FORMAT=${LOG_FORMAT:-$DEF_LOG_FORMAT}
+    export LOG_DATE_FORMAT=${LOG_DATE_FORMAT:-$DEF_LOG_DATE_FORMAT}     # Eg: 2014-09-07 21:51:57 EST
     export LOG_COLOR_ENABLE=${LOG_COLOR_ENABLE:-1}                      # Enable colors by default
     export LOG_LEVEL=${LOG_LEVEL:-${LOG_LEVELS[DEBUG]}}                 # Logs all messages to the terminal
     export LOG_COLOR_DEBUG=${LOG_COLOR_DEBUG:-"\033[0;34m"}             # Blue
