@@ -15,8 +15,21 @@ set -e
 # Configurables
 
 # RFC-5424 log levels
+# -------------------
+# DEBUG: Detailed debug information.
+# INFO: Interesting events
+# NOTICE: Normal but significant events.
+# WARNING: Exceptional occurrences that are not errors
+# ERROR: Runtime errors that do not require immediate action but
+#        should typically be logged and monitored.
+# CRITICAL: Critical conditions.
+# ALERT: Action must be taken immediately.
+# EMERGENCY: Emergency: System is unusable.
+#
+# An additional level OFF is added.
+# When log level set to OFF no more messages are logged to the console
 declare -A LOG_LEVELS
-export LOG_LEVELS=([DEBUG]=7 [INFO]=6 [NOTICE]=5 [WARNING]=4 [ERROR]=3 [CRITICAL]=2 [ALERT]=1 [EMERGENCY]=0)
+export LOG_LEVELS=([OFF]=8 [DEBUG]=7 [INFO]=6 [NOTICE]=5 [WARNING]=4 [ERROR]=3 [CRITICAL]=2 [ALERT]=1 [EMERGENCY]=0)
 
 # Make sure that HOME exist
 export HOME=${HOME:-$(getent passwd "$(whoami)" | cut -d: -f6)}
@@ -50,6 +63,7 @@ LOG_VARS
 # Individual Log Functions
 # These can be overwritten to provide custom behavior for different log levels
 
+OFF()       { LOG_HANDLER_DEFAULT "$FUNCNAME" "$@"; }
 DEBUG()     { LOG_HANDLER_DEFAULT "$FUNCNAME" "$@"; }
 INFO()      { LOG_HANDLER_DEFAULT "$FUNCNAME" "$@"; }
 NOTICE()    { LOG_HANDLER_DEFAULT "$FUNCNAME" "$@"; }
@@ -155,6 +169,7 @@ LOG_HANDLER_COLORTERM() {
     local color="${!color_variable}"
     log="$color$log$RESET_COLOR"
 
+    [ "${LOG_LEVEL}" -eq "${LOG_LEVELS[OFF]}" ] && return 0
     [ "${level_value}" -gt "$LOG_LEVEL" ] && return 0
     echo -e "$log"
 }
@@ -167,6 +182,7 @@ LOG_HANDLER_TERM() {
     local level_value="$(LOG_LEVEL_VALUE "$level")"
     local log="$2"
 
+    [ "${LOG_LEVEL}" -eq "${LOG_LEVELS[OFF]}" ] && return 0
     [ "${level_value}" -gt "$LOG_LEVEL" ] && return 0
     echo -e "$log"
 }

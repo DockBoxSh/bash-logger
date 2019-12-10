@@ -10,10 +10,14 @@
 # Including the logger functions
 source bash-logger.sh
 
+# set log level do DEBUG
+LOG_LEVEL=$(LOG_LEVEL_VALUE DEBUG)
+INFO "Log level set to $(LOG_LEVEL_NAME ${LOG_LEVEL})"
+
 # Regular Usage
 echo # newline
-INFO "Info log with default configurations"
 DEBUG "Debug log with default configurations"
+INFO "Info log with default configurations"
 NOTICE "Notice log with default configurations"
 WARNING "Waring log with default configurations"
 
@@ -22,8 +26,9 @@ echo # newline
 export LOGFILE=~/my-bash-logger.log
 export LOG_DATE_FORMAT='+%c'
 export LOG_FORMAT='%LEVEL %DATE -- %MESSAGE'
-NOTICE "Configurations changed"
+WARNING "Configurations changed"
 DEBUG "example debug log"
+INFO "example info log"
 NOTICE "example notice log"
 WARNING "example warning log"
 
@@ -31,8 +36,9 @@ WARNING "example warning log"
 echo # newline
 LOG_RESET
 export LOGFILE=./my-bash-logger.log
-NOTICE "Configurations Reset"
+WARNING "Configurations Reset"
 DEBUG "example debug log"
+INFO "example info log"
 NOTICE "example notice log"
 WARNING "example warning log"
 

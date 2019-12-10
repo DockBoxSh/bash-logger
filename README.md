@@ -1,7 +1,7 @@
 # ![](https://github.com/docker-suite/artwork/raw/master/logo/png/logo_32.png) Bash Logger
 ![License: MIT](https://img.shields.io/github/license/docker-suite/goss.svg?color=green&style=flat-square)
 
-Bash Logger designed to incorperate [PSR-3](http://www.php-fig.org/psr/psr-3/) compliance.
+Bash Logger designed to incorporate [PSR-3](http://www.php-fig.org/psr/psr-3/) compliance.
 
 ## ![](https://github.com/docker-suite/artwork/raw/master/various/pin/png/pin_16.png) Contributors
 
@@ -52,6 +52,9 @@ Bash Logger supports the logging levels described by [RFC 5424](http://tools.iet
   you up.
 
 - **EMERGENCY** Emergency: system is unusable.
+
+An additional level **OFF** is added to completely remove messages from the console.</br>
+However, messages are still logged to file.
 
 ## ![](https://github.com/docker-suite/artwork/raw/master/various/pin/png/pin_16.png) Handlers
 
