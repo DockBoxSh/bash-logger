@@ -40,6 +40,7 @@ export DEF_LOG_DATE_FORMAT='+%F %T %Z'
 
 # Define LOG variables
 LOG_VARS() {
+    export LOG_LOGFILE_ENABLE=${LOG_LOGFILE_ENABLE:-1}                  # Enable logging to file
     export LOGFILE=${LOGFILE:-"$HOME/bash-logger.log"}
     export LOG_FORMAT=${LOG_FORMAT:-$DEF_LOG_FORMAT}
     export LOG_DATE_FORMAT=${LOG_DATE_FORMAT:-$DEF_LOG_DATE_FORMAT}     # Eg: 2014-09-07 21:51:57 EST
@@ -153,9 +154,9 @@ LOG_HANDLER_DEFAULT() {
 LOG_HANDLER_OUT(){
     local level="$1"
     local formatted_log="$(FORMAT_LOG "$@")"
-    [ "${LOG_COLOR_ENABLE}" -eq "1" ] && LOG_HANDLER_COLORTERM "$level" "$formatted_log"
-    [ "${LOG_COLOR_ENABLE}" -ne "1" ] && LOG_HANDLER_TERM "$level" "$formatted_log"
-    LOG_HANDLER_LOGFILE "$level" "$formatted_log"
+    if [ "${LOG_COLOR_ENABLE}" -eq "1" ]; then LOG_HANDLER_COLORTERM "$level" "$formatted_log"; fi
+    if [ "${LOG_COLOR_ENABLE}" -ne "1" ]; then LOG_HANDLER_TERM "$level" "$formatted_log"; fi
+    if [ "${LOG_LOGFILE_ENABLE}" -eq "1" ]; then LOG_HANDLER_LOGFILE "$level" "$formatted_log"; fi
 }
 
 # Outputs a log to the stdout, colourised using the LOG_COLOR configurables

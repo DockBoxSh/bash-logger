@@ -83,3 +83,10 @@ echo "Log message from pipe" | WARNING "prefix:"
 echo -e "This is a\nmultiline message\nfrom pipe" | NOTICE "pipe:"
 # Pipe empty message
 echo "" | WARNING "pipe:"
+
+# Do not log to file
+export LOG_LOGFILE_ENABLE=0
+WARNING "NOT LOGGING TO FILE"
+DEBUG "NOT LOGGING TO FILE"
+INFO "NOT LOGGING TO FILE"
+NOTICE "NOT LOGGING TO FILE"
